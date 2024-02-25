@@ -28,6 +28,7 @@ export class Fullscreen extends AbstractMenuButton {
       container.style.top = "0";
       container.style.left = "0";
       container.style.zIndex = "9999";
+      container.setAttribute("class", "aie-container aie-fullscreen");
     } else {
       container.style.height = "100%";
       container.style.width = "";
@@ -36,6 +37,7 @@ export class Fullscreen extends AbstractMenuButton {
       container.style.top = "";
       container.style.left = "";
       container.style.zIndex = "";
+      container.setAttribute("class", "aie-container");
     }
     this.isFullscreen = !this.isFullscreen;
     this.querySelector("div")!.innerHTML = this.isFullscreen
