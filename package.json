@@ -1,7 +1,7 @@
 {
   "name": "@spacetimeline/ai-editor",
   "author": "spacetimeline",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "keywords": [
     "editor",
@@ -81,11 +81,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/aieditor-team/aieditor"
+    "url": "https://github.com/spacetimeline/ai-editor.git"
   },
   "bugs": {
-    "url": "https://github.com/aieditor-team/aieditor/issues"
+    "url": "https://github.com/spacetimeline/ai-editor.git/issues"
   },
-  "homepage": "https://github.com/aieditor-team/aieditor#readme",
+  "homepage": "https://github.com/spacetimeline/ai-editor.git#readme",
   "license": "LGPL"
 }
