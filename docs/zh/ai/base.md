@@ -39,7 +39,7 @@ version?: string,
 - **appId**：应用 ID。
 - **apiKey**：api Key。
 - **apiSecret**：api 秘钥。
-- **version**: 版本，默认为 v3.1。
+- **version**: 版本，默认为 v3.5。
 
 
 ## 服务端签名

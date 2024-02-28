@@ -17,7 +17,7 @@ export class SparkAiModel extends AiModel {
     constructor(editor: Editor, globalConfig: AiGlobalConfig) {
         super(editor, globalConfig, "spark");
         this.aiModelConfig = {
-            version: "v3.1",
+            version: "v3.5",
             protocol: "wss",
             ...globalConfig.models["spark"]
         } as SparkAiModelConfig;
@@ -85,7 +85,7 @@ export class SparkAiModel extends AiModel {
 
     private getDomain(sparkAiModelConfig: SparkAiModelConfig) {
         switch (sparkAiModelConfig.version) {
-            case "v3.1":
+            case "v3.5":
                 return "generalv3"
             case "v2.1":
                 return "generalv2"

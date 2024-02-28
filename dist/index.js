@@ -16918,7 +16918,7 @@ const AE = /* @__PURE__ */ pi(SE), Ia = () => "10000000-1000-4000-8000-100000000
 class ME extends mE {
   constructor(e, n) {
     super(e, n, "spark"), this.aiModelConfig = {
-      version: "v3.1",
+      version: "v3.5",
       protocol: "wss",
       ...n.models.spark
     };
@@ -16965,7 +16965,7 @@ class ME extends mE {
   }
   getDomain(e) {
     switch (e.version) {
-      case "v3.1":
+      case "v3.5":
         return "generalv3";
       case "v2.1":
         return "generalv2";

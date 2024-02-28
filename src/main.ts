@@ -22,8 +22,10 @@ window.aiEditor = new AiEditor({
     ai: {
         models: {
             spark: {
-                // ...config
-            }
+                appId: 'b3ce05e2',
+                apiKey: '12b5bc19cd3219ebcc47bab31274c46a',
+                apiSecret: 'YzUxYzRkNjgzODlkMmY0NzU3ZjM5YTQ4',
+              },
         },
         // bubblePanelEnable:false,
         bubblePanelModel: "spark",
