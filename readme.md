@@ -5,11 +5,21 @@
 
 # AiEditor
 
+About AiEditor (official website https://aieditor.dev)
 
 > AiEditor is a next-generation rich text editor for AI. 
 > It is based on Web Component and therefore supports almost any front-end framework 
 > such as Vue, React, Angular and Svelte. It is adapted to PC Web and mobile, and provides two themes: light and dark. 
 > In addition, it also provides flexible configuration, developers can easily use it to develop any text editing application.
+
+## Online demo
+
+- Modern style: http://aieditor1.jpress.cn
+- Classic Style: http://aieditor.jpress.cn
+
+
+
+![screenshot.png](docs%2Fassets%2Fimage%2Fscreenshot.png)
 
 
 ## Completed
@@ -37,3 +47,11 @@
 - [ ] PDF export, preview
 - [ ] Notion-like operation
 - [ ] More llm integrated: ChatGPT
+
+## Quick start
+
+Visit: https://aieditor.dev/zh/getting-started.html
+
+## Communication
+
+QQ group: 560291578

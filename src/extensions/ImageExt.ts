@@ -174,7 +174,6 @@ export const ImageExt = Image.extend<ImageOptions>({
                 const container = document.createElement('div')
                 const {src, width, height, align} = e.node.attrs;
                 container.classList.add(`align-${align}`)
-
                 container.innerHTML = `
                 <div class="aie-resize-wrapper">
                     <div class="aie-resize">

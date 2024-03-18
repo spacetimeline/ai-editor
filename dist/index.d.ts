@@ -99,7 +99,7 @@ export declare type AiEditorOptions = {
         uploadHeaders?: Record<string, any>;
         uploader?: (file: File, uploadUrl: string, headers: Record<string, any>, formName: string) => Promise<Record<string, any>>;
         uploaderEvent?: UploaderEvent;
-        defaultSize?: number | string;
+        defaultSize?: number;
         allowBase64: boolean;
     };
     video?: {
@@ -108,7 +108,6 @@ export declare type AiEditorOptions = {
         uploadHeaders?: Record<string, any>;
         uploader?: (file: File, uploadUrl: string, headers: Record<string, any>, formName: string) => Promise<Record<string, any>>;
         uploaderEvent?: UploaderEvent;
-        defaultSize?: number | string;
     };
     attachment?: {
         customMenuInvoke?: (editor: AiEditor) => void;

@@ -1,6 +1,7 @@
-import {AiEditor} from "./core/AiEditor.ts";
-// import {config} from "./xinghuo.ts";
-
+import { AiEditor } from "./core/AiEditor.ts";
+import { config } from "./xinghuo.ts";
+// import { wenxinConfig } from "./wenxin.ts";
+// wenxinConfig导出 { access_token: "****", }
 // @ts-ignore
 window.aiEditor = new AiEditor({
     element: "#aiEditor",
@@ -12,20 +13,14 @@ window.aiEditor = new AiEditor({
     //     alert("保存")
     //     return true;
     // },
-    image: {
-        allowBase64:true, 
-        defaultSize: '100%',
-    },
-    video: {
-        defaultSize: '100%',
-    },
     ai: {
         models: {
             spark: {
-                appId: 'b3ce05e2',
-                apiKey: '12b5bc19cd3219ebcc47bab31274c46a',
-                apiSecret: 'YzUxYzRkNjgzODlkMmY0NzU3ZjM5YTQ4',
-              },
+                ...config
+            },
+            // wenxin: {
+            //     ...wenxinConfig
+            // }
         },
         // bubblePanelEnable:false,
         bubblePanelModel: "spark",

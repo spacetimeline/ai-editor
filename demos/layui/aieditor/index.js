@@ -14379,7 +14379,7 @@ class Tv extends kv {
   }
   getDomain() {
     switch (this.version) {
-      case "v3.5":
+      case "v3.1":
         return "generalv3";
       case "v2.1":
         return "generalv2";
@@ -15183,7 +15183,7 @@ class $v {
     q(this, "onCreateURL");
     var l;
     const { protocol: n, appId: r, apiKey: i, apiSecret: s, version: o, onCreateURL: a } = (l = e.ai) == null ? void 0 : l.model.xinghuo;
-    this.protocol = n || "ws", this.appId = r, this.apiKey = i, this.apiSecret = s, this.version = o || "v3.5", this.onCreateURL = a;
+    this.protocol = n || "ws", this.appId = r, this.apiKey = i, this.apiSecret = s, this.version = o || "v3.1", this.onCreateURL = a;
   }
   start(e, n, r) {
     const i = this.onCreateURL ? this.onCreateURL(this) : this.createUrl();
