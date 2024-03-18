@@ -1,5 +1,5 @@
 import { AiEditor } from "./core/AiEditor.ts";
-import { config } from "./xinghuo.ts";
+// import { config } from "./xinghuo.ts";
 // import { wenxinConfig } from "./wenxin.ts";
 // wenxinConfig导出 { access_token: "****", }
 // @ts-ignore
@@ -16,7 +16,7 @@ window.aiEditor = new AiEditor({
     ai: {
         models: {
             spark: {
-                ...config
+                // ...config
             },
             // wenxin: {
             //     ...wenxinConfig
