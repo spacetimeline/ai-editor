@@ -13,14 +13,14 @@ window.aiEditor = new AiEditor({
     //     alert("保存")
     //     return true;
     // },
+    // image:{
+    //     uploadUrl:"http://localhost:8080/api/v1/aieditor/upload/image"
+    // },
     ai: {
         models: {
             spark: {
                 // ...config
             },
-            // wenxin: {
-            //     ...wenxinConfig
-            // }
         },
         // bubblePanelEnable:false,
         bubblePanelModel: "spark",

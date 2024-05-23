@@ -66,6 +66,11 @@ export class TableBubbleMenu extends AbstractBubbleMenu {
         ]
     }
 
+    connectedCallback() {
+        this.style.display = "none"
+        super.connectedCallback();
+    }
+
 
     onItemClick(id: string): void {
         if (id === "insert-column-left") {
@@ -101,9 +106,7 @@ export class TableBubbleMenu extends AbstractBubbleMenu {
 
         ids.forEach((id) => {
             const div = this.querySelector(`#${id}`) as HTMLElement;
-            if (div) {
-                div.style.display = "";
-            }
+            if (div) div.style.display = "";
         })
 
     }

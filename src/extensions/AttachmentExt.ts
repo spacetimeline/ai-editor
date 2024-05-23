@@ -9,9 +9,10 @@ import {UploaderEvent} from "../core/AiEditor.ts";
 export interface AttachmentOptions {
     HTMLAttributes: Record<string, any>,
     uploadUrl?: string,
-    uploadHeaders: Record<string, any>,
+    uploadHeaders?: (() => Record<string, any>) | Record<string, any>,
     uploader?: (file: File, uploadUrl: string, headers: Record<string, any>, formName: string) => Promise<Record<string, any>>,
     uploaderEvent?: UploaderEvent,
+    uploadFormName?: string,
 }
 
 
@@ -49,8 +50,11 @@ export const AttachmentExt = Extension.create<AttachmentOptions>({
         return {
             uploadAttachment: (file: File) => () => {
 
+                const headers = (typeof this.options.uploadHeaders === "object") ? this.options.uploadHeaders :
+                    ((typeof this.options.uploadHeaders === "function") ? this.options.uploadHeaders() : {});
+
                 if (this.options.uploaderEvent && this.options.uploaderEvent.onUploadBefore) {
-                    if (this.options.uploaderEvent.onUploadBefore(file, this.options.uploadUrl!, this.options.uploadHeaders) === false) {
+                    if (this.options.uploaderEvent.onUploadBefore(file, this.options.uploadUrl!, headers) === false) {
                         return false;
                     }
                 }
@@ -67,13 +71,13 @@ export const AttachmentExt = Extension.create<AttachmentOptions>({
                 }));
 
 
-
                 const uploader = this.options.uploader || getUploader(this.options.uploadUrl!);
-                uploader(file, this.options.uploadUrl!, this.options.uploadHeaders, "attachment")
+                const uploadFormName = this.options.uploadFormName || "attachment";
+                uploader(file, this.options.uploadUrl!, headers, uploadFormName)
                     .then(json => {
 
                         //process on success
-                        if (this.options.uploaderEvent && this.options.uploaderEvent.onSuccess) {
+                        if (this.options.uploaderEvent?.onSuccess) {
                             const result = this.options.uploaderEvent.onSuccess(file, json);
                             if (typeof result === "boolean" && !result) {
                                 return;
