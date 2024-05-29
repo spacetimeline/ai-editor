@@ -153,8 +153,8 @@ export declare type AiEditorOptions = {
         uploadFormName?: string;
         uploader?: (file: File, uploadUrl: string, headers: Record<string, any>, formName: string) => Promise<Record<string, any>>;
         uploaderEvent?: UploaderEvent;
-        defaultSize?: number;
-        allowBase64?: boolean;
+        defaultSize?: number | string;
+        allowBase64: boolean;
     };
     video?: {
         customMenuInvoke?: (editor: AiEditor) => void;
@@ -342,10 +342,10 @@ export declare class TableBubbleMenu extends AbstractBubbleMenu {
 }
 
 export declare class TextSelectionBubbleMenu extends AbstractBubbleMenu {
-    private _instance?;
-    private aiBubbleInstance?;
-    private bubblePanelEnable;
-    private aiClient?;
+    tippyInstance?: Instance;
+    aiBubbleInstance?: Instance;
+    bubblePanelEnable: boolean;
+    aiClient?: AiClient | null;
     constructor();
     connectedCallback(): void;
     onCreate(props: EditorEvents["create"], _: AiEditorOptions): void;
@@ -365,5 +365,6 @@ export declare interface UploaderEvent {
 
 
 export * from "i18next";
+export * from "tippy.js";
 
 export { }
