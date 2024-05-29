@@ -259,36 +259,6 @@ export declare class SparkAiModel extends AiModel {
     createAiClientUrl(): string;
 }
 
-<<<<<<< HEAD
-export declare class TableBubbleMenu extends AbstractBubbleMenu {
-    constructor();
-    connectedCallback(): void;
-    onItemClick(id: string): void;
-    show(ids: string[]): void;
-    onTransaction(props: EditorEvents["transaction"]): void;
-    isAllTableSelected(selection: CellSelection): boolean;
-    isOneCellSelected(selection: CellSelection): boolean;
-    isColumnSelected(selection: CellSelection, view: EditorView): boolean;
-    isRowSelected(selection: CellSelection, view: EditorView): boolean;
-}
-
-export declare class TextSelectionBubbleMenu extends AbstractBubbleMenu {
-    tippyInstance?: Instance;
-    aiBubbleInstance?: Instance;
-    bubblePanelEnable: boolean;
-    aiClient?: AiClient | null;
-    constructor();
-    connectedCallback(): void;
-    onCreate(props: EditorEvents["create"], _: AiEditorOptions): void;
-    set instance(value: Instance);
-    onItemClick(_id: string): void;
-    onTransaction(_: EditorEvents["transaction"]): void;
-    private createAiPanelElement;
-    private startChat;
-}
-
-=======
->>>>>>> 65f69b6723dfe871540b1890abc926da527ff6c5
 export declare interface UploaderEvent {
     onUploadBefore?: (file: File, uploadUrl: string, headers: Record<string, any>) => void | boolean;
     onSuccess?: (file: File, response: any) => any;
@@ -296,11 +266,4 @@ export declare interface UploaderEvent {
     onError?: (file: File, err: any) => void;
 }
 
-<<<<<<< HEAD
-
-export * from "i18next";
-export * from "tippy.js";
-
-=======
->>>>>>> 65f69b6723dfe871540b1890abc926da527ff6c5
 export { }
