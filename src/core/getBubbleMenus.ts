@@ -56,8 +56,26 @@ const createTextSelectionBubbleMenu = (aiEditor: AiEditor) => {
         element: menuEl,
         tippyOptions: {
             appendTo: aiEditor.container,
-            placement: 'top',
             arrow: false,
+            getReferenceClientRect: (() => {
+                const selection = aiEditor.innerEditor.state.selection;
+                const {ranges} = selection
+                const from = Math.min(...ranges.map(range => range.$from.pos))
+                const to = Math.max(...ranges.map(range => range.$to.pos))
+
+                const {view} = aiEditor.innerEditor;
+
+                const domRect = posToDOMRect(view, from, to);
+                const viewPos = view.coordsAtPos(0);
+                const selectPos = view.coordsAtPos(from);
+
+                const top = selectPos.top - viewPos.top > 30 ? selectPos.top : selectPos.bottom + 65;
+
+                return {
+                    ...domRect,
+                    top: top
+                };
+            }),
             onCreate(instance: Instance) {
                 menuEl.instance = instance;
             }
@@ -70,7 +88,7 @@ const createTextSelectionBubbleMenu = (aiEditor: AiEditor) => {
             return !selection.empty && getTextBetween(editor.state.doc, {
                     from: selection.from,
                     to: selection.to
-                }).length > 0
+                }).trim().length > 0
                 && !editor.isActive("link")
                 && !editor.isActive("image")
                 // 选中表格的时候取消 文本的弹出
@@ -92,10 +110,7 @@ const createLinkBubbleMenu = (aiEditor: AiEditor) => {
             arrow: false,
         },
         shouldShow: ({editor}) => {
-            if (!editor.isEditable) {
-                return false;
-            }
-            return editor.isActive("link")
+            return editor.isEditable && editor.isActive("link")
         }
     })
 }
@@ -115,7 +130,7 @@ const createImageBubbleMenu = (aiEditor: AiEditor) => {
                 const {ranges} = aiEditor.innerEditor.state.selection
                 const from = Math.min(...ranges.map(range => range.$from.pos))
                 const to = Math.max(...ranges.map(range => range.$to.pos))
-                const view = aiEditor.innerEditor.view;
+                const {view} = aiEditor.innerEditor;
 
                 let node = view.nodeDOM(from) as HTMLElement
                 const imageEl = node.querySelector("img") as HTMLImageElement;
@@ -129,10 +144,7 @@ const createImageBubbleMenu = (aiEditor: AiEditor) => {
             })
         },
         shouldShow: ({editor}) => {
-            if (!editor.isEditable) {
-                return false;
-            }
-            return editor.isActive("image")
+            return editor.isEditable && editor.isActive("image")
         }
     })
 }
@@ -153,11 +165,11 @@ const createTableBubbleMenu = (aiEditor: AiEditor) => {
                 const {ranges} = selection
                 const from = Math.min(...ranges.map(range => range.$from.pos))
                 const to = Math.max(...ranges.map(range => range.$to.pos))
-                const view = aiEditor.innerEditor.view;
+                const {view, state} = aiEditor.innerEditor;
 
                 const domRect = posToDOMRect(view, from, to);
-                const tablePos = aiEditor.innerEditor.state.selection.$from.posAtIndex(0, 1);
-                const coordsAtPos = aiEditor.innerEditor.view.coordsAtPos(tablePos);
+                const tablePos = state.selection.$from.posAtIndex(0, 1);
+                const coordsAtPos = view.coordsAtPos(tablePos);
 
                 return {
                     ...domRect,
@@ -167,7 +179,7 @@ const createTableBubbleMenu = (aiEditor: AiEditor) => {
         },
         shouldShow: ({editor}) => {
             const {state: {selection}} = editor;
-            return editor.isActive("table") && selection instanceof CellSelection
+            return editor.isEditable && editor.isActive("table") && selection instanceof CellSelection
         }
     })
 }

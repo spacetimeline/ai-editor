@@ -1,61 +1,12 @@
-import { CellSelection } from '@tiptap/pm/tables';
 import { ChainedCommands } from '@tiptap/core/dist/packages/core/src/types';
 import { Editor } from '@tiptap/core';
 import { EditorEvents } from '@tiptap/core';
 import { EditorOptions } from '@tiptap/core';
-import { EditorView } from '@tiptap/pm/view';
 import { Extensions } from '@tiptap/core';
 import { Fragment } from 'prosemirror-model';
-import { Instance } from 'tippy.js';
 import { JSONContent } from '@tiptap/core';
 
-export declare abstract class AbstractBubbleMenu extends HTMLElement implements AiEditorEvent {
-    editor?: Editor;
-    items: BubbleMenuItem[];
-    protected constructor();
-    isActive(id: string): boolean | undefined;
-    connectedCallback(): void;
-    onCreate(props: EditorEvents['create'], _: AiEditorOptions): void;
-    abstract onItemClick(id: string): void;
-    abstract onTransaction(props: EditorEvents['transaction']): void;
-}
-
-export declare class AbstractColorsMenuButton extends AbstractMenuButton {
-    historyColorsKey: string;
-    historyColors: string[];
-    iconSvg?: string;
-    menuColorEL?: HTMLDivElement;
-    onColorItemClick?: (color: string) => void;
-    onDefaultColorClick?: () => void;
-    constructor();
-    connectedCallback(): void;
-    createMenuElement(): HTMLDivElement;
-    invokeColorItemClick(rootDiv: HTMLDivElement, item: HTMLDivElement): void;
-}
-
-export declare abstract class AbstractDropdownMenuButton<T> extends AbstractMenuButton {
-    tippyInstance?: Instance;
-    tippyEl?: HTMLDivElement;
-    textEl?: HTMLDivElement;
-    menuData: T[];
-    menuTextWidth: string;
-    defaultMenuIndex: number;
-    refreshMenuText: boolean;
-    width: string;
-    dropDivWith: string;
-    dropDivHeight: string;
-    showItemsTip: boolean;
-    renderTemplate(): void;
-    connectedCallback(): void;
-    createMenuElement(): HTMLDivElement;
-    onTransaction(event: EditorEvents["transaction"]): void;
-    abstract onDropdownActive(editor: Editor, index: number): boolean;
-    abstract onMenuTextRender(index: number): Element | string;
-    abstract onDropdownItemRender(index: number): Element | string;
-    abstract onDropdownItemClick(index: number): void;
-}
-
-export declare class AbstractMenuButton extends HTMLElement implements AiEditorEvent {
+declare class AbstractMenuButton extends HTMLElement implements AiEditorEvent {
     template: string;
     editor?: Editor;
     options?: AiEditorOptions;
@@ -261,12 +212,6 @@ export declare class AiModelManager {
     static set(modelName: string, aiModel: AiModel): void;
 }
 
-export declare type BubbleMenuItem = {
-    id: string;
-    title?: string;
-    content: string;
-};
-
 export declare interface CustomMenu {
     id?: string;
     className?: string;
@@ -276,8 +221,6 @@ export declare interface CustomMenu {
     onClick?: (event: MouseEvent, editor: AiEditor) => void;
     onCreate?: (button: HTMLElement, editor: AiEditor) => void;
 }
-
-export declare const defineCustomElement: (name: string, element: CustomElementConstructor) => void;
 
 declare class Footer extends HTMLElement implements AiEditorEvent {
     count: number;
@@ -295,25 +238,12 @@ declare class Header extends HTMLElement implements AiEditorEvent {
     onTransaction(event: EditorEvents["transaction"]): void;
 }
 
-export declare class ImageBubbleMenu extends AbstractBubbleMenu {
-    constructor();
-    onItemClick(id: string): void;
-    onTransaction(_: EditorEvents["transaction"]): void;
-}
-
 export declare class InnerEditor extends Editor {
     aiEditor: AiEditor;
     userOptions: AiEditorOptions;
     constructor(aiEditor: AiEditor, editorOptions: AiEditorOptions, options?: Partial<EditorOptions>);
     parseHtml(html: string): Fragment;
     parseMarkdown(markdown: string): Fragment;
-}
-
-export declare class LinkBubbleMenu extends AbstractBubbleMenu {
-    constructor();
-    connectedCallback(): void;
-    onItemClick(id: string): void;
-    onTransaction(_: EditorEvents["transaction"]): void;
 }
 
 export declare interface NameAndValue {
@@ -329,6 +259,7 @@ export declare class SparkAiModel extends AiModel {
     createAiClientUrl(): string;
 }
 
+<<<<<<< HEAD
 export declare class TableBubbleMenu extends AbstractBubbleMenu {
     constructor();
     connectedCallback(): void;
@@ -356,6 +287,8 @@ export declare class TextSelectionBubbleMenu extends AbstractBubbleMenu {
     private startChat;
 }
 
+=======
+>>>>>>> 65f69b6723dfe871540b1890abc926da527ff6c5
 export declare interface UploaderEvent {
     onUploadBefore?: (file: File, uploadUrl: string, headers: Record<string, any>) => void | boolean;
     onSuccess?: (file: File, response: any) => any;
@@ -363,8 +296,11 @@ export declare interface UploaderEvent {
     onError?: (file: File, err: any) => void;
 }
 
+<<<<<<< HEAD
 
 export * from "i18next";
 export * from "tippy.js";
 
+=======
+>>>>>>> 65f69b6723dfe871540b1890abc926da527ff6c5
 export { }
