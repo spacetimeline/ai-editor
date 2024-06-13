@@ -20,7 +20,7 @@ declare class AbstractMenuButton extends HTMLElement implements AiEditorEvent {
 }
 
 declare interface AiClient {
-    start: (message: string) => void;
+    start: (payload: string) => void;
     stop: () => void;
 }
 
@@ -78,8 +78,6 @@ export declare type AiEditorOptions = {
     i18n?: Record<string, Record<string, string>>;
     placeholder?: string;
     theme?: "light" | "dark";
-    cbName?: string;
-    cbUrl?: string;
     onMentionQuery?: (query: string) => any[] | Promise<any[]>;
     onCreateBefore?: (editor: AiEditor, extensions: Extensions) => void | Extensions;
     onDestroy?: (editor: AiEditor) => void;
@@ -87,6 +85,7 @@ export declare type AiEditorOptions = {
     onChange?: (editor: AiEditor) => void;
     onSave?: (editor: AiEditor) => boolean;
     toolbarKeys?: (string | CustomMenu)[];
+    draggable?: boolean;
     textSelectionBubbleMenu?: {
         enable?: boolean;
         elementTagName?: string;
@@ -177,11 +176,12 @@ declare interface AiMessageListener {
 }
 
 declare abstract class AiModel {
-    editor: Editor;
+    editor: InnerEditor;
     globalConfig: AiGlobalConfig;
     aiModelName: string;
     aiModelConfig: AiModelConfig;
-    constructor(editor: Editor, globalConfig: AiGlobalConfig, aiModelName: string);
+    protected constructor(editor: InnerEditor, globalConfig: AiGlobalConfig, aiModelName: string);
+    chatWithPayload(payload: any, listener: AiMessageListener): void;
     chat(selectedText: string, prompt: string, listener: AiMessageListener): void;
     /**
      * 创建客户端链接 URL
@@ -193,9 +193,9 @@ declare abstract class AiModel {
     abstract createAiClient(url: string, listener: AiMessageListener): AiClient;
     /**
      * 封装消息，把 prompt 转换为协议需要的格式
-     * @param promptMessage
+     * @param prompt
      */
-    abstract wrapMessage(promptMessage: string): any;
+    abstract wrapPayload(prompt: string): any;
 }
 
 declare interface AiModelConfig {
@@ -207,7 +207,7 @@ declare interface AiModelFactory {
 
 export declare class AiModelManager {
     private static models;
-    static init(editor: Editor, globalConfig: AiGlobalConfig): void;
+    static init(editor: InnerEditor, globalConfig: AiGlobalConfig): void;
     static get(modelName: string): AiModel;
     static set(modelName: string, aiModel: AiModel): void;
 }
@@ -224,7 +224,9 @@ export declare interface CustomMenu {
 
 declare class Footer extends HTMLElement implements AiEditorEvent {
     count: number;
+    draggable: boolean;
     constructor();
+    initDraggable(draggable?: boolean): void;
     updateCharacters(): void;
     onCreate(props: EditorEvents["create"], _: AiEditorOptions): void;
     onTransaction(props: EditorEvents["transaction"]): void;
@@ -252,9 +254,9 @@ export declare interface NameAndValue {
 }
 
 export declare class SparkAiModel extends AiModel {
-    constructor(editor: Editor, globalConfig: AiGlobalConfig);
+    constructor(editor: InnerEditor, globalConfig: AiGlobalConfig);
     createAiClient(url: string, listener: AiMessageListener): AiClient;
-    wrapMessage(promptMessage: string): string;
+    wrapPayload(promptMessage: string): string;
     private getDomain;
     createAiClientUrl(): string;
 }

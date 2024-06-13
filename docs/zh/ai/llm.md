@@ -1,6 +1,38 @@
 # 大语言模型
 
-目前，AiEditor 支持 `星火大模型`、`文心一言`以及 `自定义后端` 类型的大语言模型。
+目前，AiEditor 支持 `Openai（ChatGPT）`、`星火大模型`、`文心一言`以及 `自定义后端` 类型的大语言模型。
+
+## Openai（ChatGPT）
+
+```ts
+new AiEditor({
+    element: "#aiEditor",
+    ai: {
+        models: {
+            openai: {
+                apiKey:"sk-alQ96zbDn*****"
+            } as OpenaiModelConfig
+        }
+    },
+})
+```
+或者通过 Openai 的接口使用 暗月之面
+```ts
+new AiEditor({
+    element: "#aiEditor",
+    ai: {
+        models: {
+            openai: {
+                endpoint:"https://api.moonshot.cn",
+                model:"moonshot-v1-8k",
+                apiKey:"sk-alQ96zb******"
+            } as OpenaiModelConfig
+        }
+    },
+})
+```
+
+
 
 ## 星火大模型
 
@@ -53,10 +85,10 @@ new AiEditor({
                         "jwt": "xxxx"
                     }
                 },
-                messageWrapper: (message: string) => {
+                wrapPayload: (message: string) => {
                     return JSON.stringify({prompt: message})
                 },
-                messageParser: (message: string) => {
+                parseMessage: (message: string) => {
                     return {
                         role: "assistant",
                         content: message,
@@ -75,8 +107,8 @@ new AiEditor({
 
 - `url`: 字符串，或者返回一个字符串的方法
 - `headers`: 自定义 sse 请求的 http 头信息
-- `messageWrapper`: 把用户的 `prompt` 字符串，转换为 `url` 接口所需要的 `json` 格式（亦或者其他格式）。
-- `messageParser`：把后端响应的 `body` 内容，转换为 `AiMessage` 格式。
+- `wrapPayload`: 把用户的 `prompt` 字符串，转换为 `url` 接口所需要的 `json` 格式（亦或者其他格式）。
+- `parseMessage`：把后端响应的 `body` 内容，转换为 `AiMessage` 格式。
 
 `AiMessage` 定义如下：
 

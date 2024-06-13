@@ -1,6 +1,37 @@
 # Large language models
 
-Currently, AiEditor supports the `Spark large model`, `Wenxin Yiyuan`, and `custom backend types of large language models`.
+Currently, AiEditor supports the `Openai（ChatGPT`, `Spark large model`, `Wenxin Yiyuan`  and `custom LLMs`.
+
+##
+
+
+```ts
+new AiEditor({
+    element: "#aiEditor",
+    ai: {
+        models: {
+            openai: {
+                apiKey:"sk-alQ96zbDn*****"
+            } as OpenaiModelConfig
+        }
+    },
+})
+```
+Or use `moonshot` through Openai's config
+```ts
+new AiEditor({
+    element: "#aiEditor",
+    ai: {
+        models: {
+            openai: {
+                endpoint:"https://api.moonshot.cn",
+                model:"moonshot-v1-8k",
+                apiKey:"sk-alQ96zb******"
+            } as OpenaiModelConfig
+        }
+    },
+})
+```
 
 ## Spark large
 
@@ -39,7 +70,7 @@ new AiEditor({
 ```
 
 
-## custom backend types of large language models
+## custom backend types of LLMs
 
 ```typescript
 new AiEditor({
@@ -53,10 +84,10 @@ new AiEditor({
                         "jwt": "xxxx"
                     }
                 },
-                messageWrapper: (message: string) => {
+                wrapPayload: (message: string) => {
                     return JSON.stringify({prompt: message})
                 },
-                messageParser: (message: string) => {
+                parseMessage: (message: string) => {
                     return {
                         role: "assistant",
                         content: message,
@@ -77,8 +108,8 @@ Parameter Description:
 
 - `url`: A string or a method that returns a string.
 - `headers`: Custom HTTP header information for SSE requests.
-- `messageWrapper`: Converts the user's `prompt` string into the `JSON` format (or other formats) required by the `url` interface.
-- `messageParser`: Converts the body content of the backend response into the `AiMessage` format.
+- `wrapPayload`: Converts the user's `prompt` string into the `JSON` format (or other formats) required by the `url` interface.
+- `parseMessage`: Converts the body content of the backend response into the `AiMessage` format.
 
 Definition of `AiMessage` is as follows:
 

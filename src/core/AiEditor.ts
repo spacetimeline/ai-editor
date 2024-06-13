@@ -58,8 +58,6 @@ export type AiEditorOptions = {
     i18n?: Record<string, Record<string, string>>,
     placeholder?: string,
     theme?: "light" | "dark",
-    cbName?: string,
-    cbUrl?: string
     onMentionQuery?: (query: string) => any[] | Promise<any[]>,
     onCreateBefore?: (editor: AiEditor, extensions: Extensions) => void | Extensions,
     onDestroy?: (editor: AiEditor) => void,
@@ -67,6 +65,7 @@ export type AiEditorOptions = {
     onChange?: (editor: AiEditor) => void,
     onSave?: (editor: AiEditor) => boolean,
     toolbarKeys?: (string | CustomMenu)[],
+    draggable?:boolean,
     textSelectionBubbleMenu?: {
         enable?: boolean,
         elementTagName?:string,
@@ -118,6 +117,7 @@ const defaultOptions: Partial<AiEditorOptions> = {
     lang: "zh",
     contentRetentionKey: "ai-editor-content",
     editable: true,
+    draggable: true,
     placeholder: "",
 }
 
@@ -216,8 +216,9 @@ export class AiEditor {
         this.mainEl.style.flexGrow = "1";
         this.mainEl.style.overflow = "auto";
 
-        this.header = document.createElement("aie-header") as Header;
-        this.footer = document.createElement("aie-footer") as Footer;
+        this.header = new Header();
+        this.footer = new Footer();
+        this.footer.initDraggable(this.options.draggable)
 
         this.eventComponents.push(this.header);
         this.eventComponents.push(this.footer);

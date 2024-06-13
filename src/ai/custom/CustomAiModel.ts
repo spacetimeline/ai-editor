@@ -2,16 +2,15 @@ import {AiClient} from "../core/AiClient.ts";
 import {AiMessageListener} from "../core/AiMessageListener.ts";
 import {AiModel} from "../core/AiModel.ts";
 import {AiGlobalConfig} from "../AiGlobalConfig.ts";
-import {Editor} from "@tiptap/core";
-
 import {CustomAiModelConfig} from "./CustomAiModelConfig.ts";
 import {SseClient} from "../core/client/sse/SseClient.ts";
 import {AiClientListener} from "../core/AiClientListener.ts";
 import {WebSocketClient} from "../core/client/ws/WebSocketClient.ts";
+import {InnerEditor} from "../../core/AiEditor.ts";
 
 export class CustomAiModel extends AiModel {
 
-    constructor(editor: Editor, globalConfig: AiGlobalConfig) {
+    constructor(editor: InnerEditor, globalConfig: AiGlobalConfig) {
         super(editor, globalConfig, "custom");
         this.aiModelConfig = {
             protocol: "sse",
@@ -24,9 +23,9 @@ export class CustomAiModel extends AiModel {
         const aiClientListener: AiClientListener = {
             onStart: listener.onStart,
             onStop: listener.onStop,
-            onMessage: (messageResp) => {
+            onMessage: (bodyString) => {
                 const config = this.aiModelConfig as CustomAiModelConfig;
-                const aiMessage = config.messageParser?.(messageResp);
+                const aiMessage = config.parseMessage?.(bodyString);
                 if (aiMessage) listener.onMessage(aiMessage);
             }
         };
@@ -38,9 +37,9 @@ export class CustomAiModel extends AiModel {
             : new WebSocketClient(url, aiClientListener)
     }
 
-    wrapMessage(promptMessage: string) {
+    wrapPayload(promptMessage: string) {
         const config = this.aiModelConfig as CustomAiModelConfig;
-        return config.messageWrapper?.(promptMessage);
+        return config.wrapPayload?.(promptMessage);
     }
 
 

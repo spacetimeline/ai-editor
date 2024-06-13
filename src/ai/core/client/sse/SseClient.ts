@@ -1,25 +1,25 @@
 import {AiClientListener} from "../../AiClientListener.ts";
 import {AiClient} from "../../AiClient.ts";
 
-type configType = { url: string, method: string, headers?: Record<string, any> }
+type SSEConfig = { url: string, method: string, headers?: Record<string, any> }
 
 export class SseClient implements AiClient {
     isStop: boolean = false
-    config: configType;
+    config: SSEConfig;
     fetch?: Response;
     isOpen: boolean = false;
-    message?: string;
+    payload?: string;
     listener: AiClientListener;
     ctrl = new AbortController();
 
-    constructor(config: configType, listener: AiClientListener) {
+    constructor(config: SSEConfig, listener: AiClientListener) {
         this.config = config;
         this.listener = listener;
     }
 
 
-    start(message: string) {
-        this.message = message;
+    start(payload: string) {
+        this.payload = payload;
         this.onOpen()
         this.listener.onStart(this);
     }
@@ -36,14 +36,14 @@ export class SseClient implements AiClient {
         }
     }
 
-    async send(message: string) {
+    async send(payload: string) {
         if (this.isOpen) {
             try {
                 const response = await fetch(this.config.url,
                     {
                         method: this.config.method || "POST",
                         headers: this.config.headers,
-                        body: message
+                        body: payload
                     }
                 );
                 if (!response.ok) {
@@ -96,7 +96,7 @@ export class SseClient implements AiClient {
 
     protected onOpen() {
         this.isOpen = true;
-        this.send(this.message!);
+        this.send(this.payload!);
     }
 
     protected onMessage(answer: string) {

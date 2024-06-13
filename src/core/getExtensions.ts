@@ -36,14 +36,12 @@ import {Markdown} from "tiptap-markdown";
 import {ContainerExt} from "../extensions/ContainerExt.ts";
 import {HeadingExt} from "../extensions/HeadingExt.ts";
 import {SaveExt} from "../extensions/SaveExt.ts";
+import {FigureExt} from "../extensions/FigureExt.ts";
+import {FigcaptionExt} from "../extensions/FigcaptionExt.ts";
 
 export const getExtensions = (editor: AiEditor, options: AiEditorOptions): Extensions => {
     // the Collaboration extension comes with its own history handling
-    const ret: Extensions = options.cbName && options.cbUrl ? [StarterKit.configure({
-        history: false,
-        codeBlock: false,
-        heading: false,
-    })] : [StarterKit.configure({
+    const ret: Extensions = [StarterKit.configure({
         codeBlock: false,
         heading: false,
     })];
@@ -55,7 +53,7 @@ export const getExtensions = (editor: AiEditor, options: AiEditorOptions): Exten
             AttachmentExt.configure({
                 uploadUrl: options.attachment?.uploadUrl,
                 uploadHeaders: options.attachment?.uploadHeaders,
-                uploadFormName:options.attachment?.uploadFormName,
+                uploadFormName: options.attachment?.uploadFormName,
                 uploader: options.attachment?.uploader || options.uploader,
                 uploaderEvent: options.attachment?.uploaderEvent,
             }),
@@ -74,7 +72,7 @@ export const getExtensions = (editor: AiEditor, options: AiEditorOptions): Exten
                 defaultSize: options.image?.defaultSize || 350,
                 uploadUrl: options.image?.uploadUrl,
                 uploadHeaders: options.image?.uploadHeaders,
-                uploadFormName:options.image?.uploadFormName,
+                uploadFormName: options.image?.uploadFormName,
                 uploader: options.image?.uploader || options.uploader,
                 uploaderEvent: options.image?.uploaderEvent,
             }),
@@ -101,7 +99,6 @@ export const getExtensions = (editor: AiEditor, options: AiEditorOptions): Exten
             TaskItem.configure({
                 nested: true,
             }),
-
             CodeBlockExt.configure({
                 lowlight: createLowlight(common),
                 defaultLanguage: 'auto',
@@ -118,12 +115,14 @@ export const getExtensions = (editor: AiEditor, options: AiEditorOptions): Exten
             VideoExt.configure({
                 uploadUrl: options.video?.uploadUrl,
                 uploadHeaders: options.video?.uploadHeaders,
-                uploadFormName:options.video?.uploadFormName,
+                uploadFormName: options.video?.uploadFormName,
                 uploader: options.video?.uploader || options.uploader,
                 uploaderEvent: options.video?.uploaderEvent,
                 defaultSize: options.video?.defaultSize || 350,
             }),
             IFrameExt,
+            FigureExt,
+            FigcaptionExt,
             SaveExt.configure({
                 onSave: options.onSave,
             }),

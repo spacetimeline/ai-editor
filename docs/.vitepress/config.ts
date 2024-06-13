@@ -78,10 +78,12 @@ export default defineConfig({
                             {text: '字号', link: '/zh/config/fontSize'},
                             {text: '提及', link: '/zh/config/mention'},
                             {text: '超链接', link: '/zh/config/link'},
-                            {text: '标注💪', link: '/zh/config/comment'},
+                            {text: '批注 💪', link: '/zh/config/comment'},
+                            {text: '多人协作 💪', link: '/zh/config/collaboration'},
                             {text: '国际化', link: '/zh/config/i18n'},
                             {text: '只读模式', link: '/zh/config/editable'},
                             {text: '自定义布局', link: '/zh/config/layout'},
+                            {text: '快捷键', link: '/zh/config/shortcut'},
                         ]
                     },
                     {
@@ -90,7 +92,8 @@ export default defineConfig({
                             {text: 'AI 配置', link: '/zh/ai/base'},
                             {text: 'AI 菜单', link: '/zh/ai/menu'},
                             {text: 'AI 命令', link: '/zh/ai/command'},
-                            {text: '代码块 AI', link: '/zh/ai/codeblock'},
+                            {text: 'AI 代码块', link: '/zh/ai/codeblock'},
+                            {text: 'AI 提示词', link: '/zh/ai/prompt'},
                             {text: '大语言模型', link: '/zh/ai/llm'},
                         ]
                     },
@@ -155,6 +158,7 @@ export default defineConfig({
                     {text: 'I18N', link: '/config/i18n'},
                     {text: 'Readonly Mode', link: '/config/editable'},
                     {text: 'Custom Layout', link: '/config/layout'},
+                    {text: 'Shortcut key', link: '/config/shortcut'},
                 ]
             },
             {
@@ -163,7 +167,8 @@ export default defineConfig({
                     {text: 'AI Configuration', link: '/ai/base'},
                     {text: 'AI Menus', link: '/ai/menu'},
                     {text: 'AI Commands', link: '/ai/command'},
-                    {text: 'CodeBlock AI', link: '/ai/codeblock'},
+                    {text: 'AI CodeBlock', link: '/ai/codeblock'},
+                    {text: 'AI Prompt', link: '/ai/prompt'},
                     {text: 'LLMs', link: '/ai/llm'},
                 ]
             },

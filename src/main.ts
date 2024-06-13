@@ -1,12 +1,12 @@
 import { AiEditor } from "./core/AiEditor.ts";
-// import { config } from "./xinghuo.ts";
-// import { wenxinConfig } from "./wenxin.ts";
-// wenxinConfig导出 { access_token: "****", }
+// import { config } from "./spark.ts";
+import {OpenaiModelConfig} from "./ai/openai/OpenaiModelConfig.ts";
 // @ts-ignore
 window.aiEditor = new AiEditor({
     element: "#aiEditor",
     placeholder: "点击输入内容1...",
     contentRetention: true,
+    // draggable:false,
     // editable:false,
     content: 'AiEditor 是一个面向 AI 的下一代富文本编辑器。<p> <strong>提示：</strong> <br/>1、输入 空格 + "/" 可以快速弹出 AI 菜单 <br/> 2、输入 空格 + "@" 可以提及某人</p> ',
     // onSave:()=>{
@@ -18,12 +18,17 @@ window.aiEditor = new AiEditor({
     // },
     ai: {
         models: {
-            spark: {
-                // ...config
-            },
+            // spark: {
+            //     ...config
+            // },
+            openai:{
+                endpoint:"https://api.moonshot.cn",
+                model:"moonshot-v1-8k",
+                apiKey:"sk-alQ96zb******"
+            } as OpenaiModelConfig
         },
         // bubblePanelEnable:false,
-        bubblePanelModel: "spark",
+        // bubblePanelModel: "spark",
         onTokenConsume: (modelName, _modelConfig, count) => {
             console.log(modelName, " token count:" + count)
         }
