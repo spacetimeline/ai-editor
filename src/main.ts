@@ -1,6 +1,6 @@
-import { AiEditor } from "./core/AiEditor.ts";
+import {AiEditor} from "./core/AiEditor.ts";
 // import { config } from "./spark.ts";
-import {OpenaiModelConfig} from "./ai/openai/OpenaiModelConfig.ts";
+// import {OpenaiModelConfig} from "./ai/openai/OpenaiModelConfig.ts";
 // @ts-ignore
 window.aiEditor = new AiEditor({
     element: "#aiEditor",
@@ -9,6 +9,20 @@ window.aiEditor = new AiEditor({
     // draggable:false,
     // editable:false,
     content: 'AiEditor 是一个面向 AI 的下一代富文本编辑器。<p> <strong>提示：</strong> <br/>1、输入 空格 + "/" 可以快速弹出 AI 菜单 <br/> 2、输入 空格 + "@" 可以提及某人</p> ',
+    textSelectionBubbleMenu: {
+        // enable:false
+        //[AI, Bold, Italic, Underline, Strike, Code]
+        items: ["ai", "Bold", "Italic", "Underline", "Strike", "code"],
+    },
+
+    image: {
+        //[AlignLeft, AlignCenter, AlignRight, Delete]
+        bubbleMenuItems: ["AlignLeft", "AlignCenter", "AlignRight", "delete"]
+    },
+    link: {
+        //[Edit, UnLink, Visit]
+        bubbleMenuItems: ["Edit", "UnLink", "visit"],
+    },
     // onSave:()=>{
     //     alert("保存")
     //     return true;
@@ -21,11 +35,11 @@ window.aiEditor = new AiEditor({
             // spark: {
             //     ...config
             // },
-            openai:{
-                endpoint:"https://api.moonshot.cn",
-                model:"moonshot-v1-8k",
-                apiKey:"sk-alQ96zb******"
-            } as OpenaiModelConfig
+            openai: {
+                endpoint: "https://api.moonshot.cn",
+                model: "moonshot-v1-8k",
+                apiKey: "sk-alQ96zb******"
+            }
         },
         // bubblePanelEnable:false,
         // bubblePanelModel: "spark",

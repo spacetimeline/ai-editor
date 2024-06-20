@@ -65,15 +65,17 @@ export type AiEditorOptions = {
     onChange?: (editor: AiEditor) => void,
     onSave?: (editor: AiEditor) => boolean,
     toolbarKeys?: (string | CustomMenu)[],
-    draggable?:boolean,
+    draggable?: boolean,
     textSelectionBubbleMenu?: {
         enable?: boolean,
-        elementTagName?:string,
+        elementTagName?: string,
+        items?:(string)[],
     },
     link?: {
         autolink?: boolean,
         rel?: string,
         class?: string,
+        bubbleMenuItems?: (string)[],
     },
     uploader?: (file: File, uploadUrl: string, headers: Record<string, any>, formName: string) => Promise<Record<string, any>>,
     image?: {
@@ -84,7 +86,8 @@ export type AiEditorOptions = {
         uploader?: (file: File, uploadUrl: string, headers: Record<string, any>, formName: string) => Promise<Record<string, any>>,
         uploaderEvent?: UploaderEvent,
         defaultSize?: number | string;
-        allowBase64: boolean,
+        allowBase64?: boolean,
+        bubbleMenuItems?: (string)[],
     },
     video?: {
         customMenuInvoke?: (editor: AiEditor) => void;
