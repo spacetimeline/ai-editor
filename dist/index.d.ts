@@ -111,7 +111,7 @@ export declare type AiEditorOptions = {
         uploadFormName?: string;
         uploader?: (file: File, uploadUrl: string, headers: Record<string, any>, formName: string) => Promise<Record<string, any>>;
         uploaderEvent?: UploaderEvent;
-        defaultSize?: number;
+        defaultSize?: number | string;
         allowBase64?: boolean;
         bubbleMenuItems?: (string)[];
     };
@@ -122,6 +122,7 @@ export declare type AiEditorOptions = {
         uploadFormName?: string;
         uploader?: (file: File, uploadUrl: string, headers: Record<string, any>, formName: string) => Promise<Record<string, any>>;
         uploaderEvent?: UploaderEvent;
+        defaultSize?: number | string;
     };
     attachment?: {
         customMenuInvoke?: (editor: AiEditor) => void;
